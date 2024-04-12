@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ViHub</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <style>
+        @import "/stylesheet/styles.css";
+    </style>
+</head>
+<body>
+<div id="navbar">
+    <a th:href="@{/home}">
+        <img id="logo-at-navbar" th:src="@{images/ViHubLogo.png}" alt="ViHub Logo">
+    </a>
+    <a th:href="@{/subscriptions}">Подписки</a>
+    <a th:href="@{/recommended}">Рекомендации</a>
+    <a th:href="@{/profile}">Профиль</a>
+</div>
+</body>
+</html>
+
+
