@@ -10919,6 +10919,10 @@ html {
   font-size: 24px;
 }
 
+.text-size-12{
+  font-size: 24px;
+}
+
 #techImgs .img{
   height: 50px;
 }
@@ -10927,4 +10931,9 @@ html {
   height: 90px;
 }
 
+#likeDiv{
+  display: flex;
+  margin: 10px;
+  align-items: center;
+}
 
