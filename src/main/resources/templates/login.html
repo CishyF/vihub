@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -9,22 +10,23 @@
     </style>
 </head>
 <body>
-    <div id="login">
-        <form class="needs-validation" method="POST" th:action="@{/admin/login}" th:modelAttribute="loginUserDtoRequest" th:object="${loginUserDtoRequest}" novalidate>
+<main class="flex-shrink-0">
+    <section id="login" class="py-5">
+        <form role="form" method="POST" th:action="@{/admin/login}" th:object="${loginUserDtoRequest}" >
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="validationTooltipUsername">Username or E-mail</label>
-                    <div class="input-group">
-                        <input th:field="*{login}" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username or E-mail" aria-describedby="validationTooltipUsernamePrepend" required>
-                    </div>
+                    <input field="*{login}" name="login" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username or E-mail" aria-describedby="validationTooltipUsernamePrepend" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationTooltip01">Password</label>
-                    <input th:field="*{password}" type="password" class="form-control" id="validationTooltip01" placeholder="Password" required>
+                    <input field="*{password}" name="password" type="password" class="form-control" id="validationTooltip01" placeholder="Password" required>
                 </div>
             </div>
             <button id="login_button" class="btn btn-primary" type="submit">Log In</button>
         </form>
-    </div>
+    </section>
+</main>
+
 </body>
 </html>
