@@ -8166,7 +8166,7 @@ textarea.form-control-lg {
 
 .bg-blue {
   --bs-bg-opacity: 1;
-  background-color: blue;
+  background-color: #7f7ff3;
 }
 
 .bg-black {
@@ -10877,7 +10877,7 @@ html {
 
 #navbar {
   font-size: 20px;
-  background-color: blue;
+  background-color: #7f7ff3;
   overflow: hidden;
   display: flex; /* используем flexbox */
   justify-content: space-between; /* размещаем элементы внутри navbar с равными промежутками между ними */
@@ -10900,7 +10900,7 @@ html {
 
 #sections a:hover {
   background-color: #ddd;
-  color: blue;
+  color: #7f7ff3;
 }
 
 #sections a.active {
