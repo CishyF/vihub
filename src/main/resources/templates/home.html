@@ -1,23 +1,57 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>ViHub</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
-    <style>
-        @import "/stylesheet/styles.css";
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Home Page</title>
+    <!-- Favicon-->
+<!--    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />-->
+    <!-- Bootstrap icons-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />-->
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/bootstrap.css" rel="stylesheet" />
 </head>
-<body>
-<div id="navbar">
-    <a th:href="@{/home}">
-        <img id="logo-at-navbar" th:src="@{images/ViHubLogo.png}" alt="ViHub Logo">
-    </a>
-    <a th:href="@{/subscriptions}">Подписки</a>
-    <a th:href="@{/recommended}">Рекомендации</a>
-    <a th:href="@{/profile}">Профиль</a>
-</div>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <section class="py-5">
+            <div class="container px-5">
+                <div class="text-center mb-5 mt-0">
+                    <h1 class="fw-bolder">Welcome to ViHub</h1>
+                </div>
+                <div id="" class="row text-size-24 gx-5">
+                    <p>Your go-to streaming service for uploading and watching videos!</p>
+
+                    <h2>Key Features:</h2>
+                    <ul>
+                        <li>Easy registration and authentication process</li>
+                        <li>Seamless video uploading to our secure server</li>
+                        <li>Smooth video playback for your viewing pleasure</li>
+                        <li>Convenient video search based on different criteria</li>
+                        <li>User-friendly profile management for personalized experience</li>
+                        <li>Ability to rate and comment on videos, sharing your thoughts with the community</li>
+                    </ul>
+
+                    <p>Experience the best in video streaming with ViHub. Sign up now and start exploring our vast library of videos!</p>
+                    <p>Using technologies:</p>
+                    <div id="techImgs">
+                        <img src="https://img.shields.io/badge/SpringBoot-61DBFB?style=for-the-badge&logo=springboot&logoColor=black&color=green" alt="Spring Boot">
+                        <img src="https://img.shields.io/badge/Java%2017%20-%2061DBFB%20?style=for-the-badge" alt="Java">
+                        <img src="https://img.shields.io/badge/Redis-%2061DBFB?style=for-the-badge&logo=redis&color=darkred}" alt="Redis">
+                        <img src="https://img.shields.io/badge/PostgreSQL-%2061DBFB?style=for-the-badge&logo=postgresql&logoColor=white&color=blue" alt="PostgreSQL">
+                        <img src="https://img.shields.io/badge/Apache%20Kafka-%2061DBFB?style=for-the-badge&logo=apachekafka&logoColor=black&color=red" alt="Apache Kafka">
+                        <img src="https://img.shields.io/badge/Spring%20Security-%2061DBFB?style=for-the-badge&logo=springsecurity&logoColor=green&color=lightblu" alt="Spring Security">
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </section>
 </body>
 </html>
-
-

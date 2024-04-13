@@ -1,10 +1,10 @@
 #navbar {
   background-color: blue;
   overflow: hidden;
-  height: 50px; /* высота navbar */
+  height: 75px; /* высота navbar */
   display: flex; /* используем flexbox */
   justify-content: space-between; /* размещаем элементы внутри navbar с равными промежутками между ними */
-  align-items: center; /* выравниваем элементы по центру по вертикали */
+  align-items: end; /* выравниваем элементы по центру по вертикали */
 }
 
 #navbar a {
@@ -13,7 +13,7 @@
   padding: 0 20px; /* отступы по бокам */
   height: 100%; /* чтобы переходы занимали всю высоту navbar */
   display: flex; /* используем flexbox */
-  align-items: center; /* выравниваем текст по центру по вертикали */
+  align-items: end;/* выравниваем текст по центру по вертикали */
 }
 
 #navbar a:hover {
