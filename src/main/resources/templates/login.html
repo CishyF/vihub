@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+    <style>
+        @import "/stylesheet/bootstrap.css";
+    </style>
+</head>
+<body>
+    <div id="login">
+        <form class="needs-validation" method="POST" th:action="@{/admin/login}" th:modelAttribute="loginUserDtoRequest" th:object="${loginUserDtoRequest}" novalidate>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationTooltipUsername">Username or E-mail</label>
+                    <div class="input-group">
+                        <input th:field="*{login}" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username or E-mail" aria-describedby="validationTooltipUsernamePrepend" required>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationTooltip01">Password</label>
+                    <input th:field="*{password}" type="password" class="form-control" id="validationTooltip01" placeholder="Password" required>
+                </div>
+            </div>
+            <button id="login_button" class="btn btn-primary" type="submit">Log In</button>
+        </form>
+    </div>
+</body>
+</html>

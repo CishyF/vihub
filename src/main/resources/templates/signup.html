@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+    <style>
+        @import "/stylesheet/bootstrap.css";
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" th:action="@{/sign-up}" th:object="${registrationUserDtoRequest}" novalidate>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationTooltipUsername">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                        </div>
+                        <input th:field="*{username}" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                        <div class="invalid-tooltip">
+                            Please choose a unique and valid username.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationTooltip01">Password</label>
+                    <input th:field="*{password}" type="password" class="form-control" id="validationTooltip01" placeholder="Password" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationTooltip02">E-mail</label>
+                    <input th:field="*{email}" type="text" class="form-control" id="validationTooltip02" placeholder="E-mail" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationTooltip03">First name</label>
+                    <input th:field="*{firstname}" type="text" class="form-control" id="validationTooltip03" placeholder="First name" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationTooltip04">Last name</label>
+                    <input th:field="*{lastname}" type="text" class="form-control" id="validationTooltip04" placeholder="Last name" required>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>
