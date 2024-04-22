@@ -1,89 +1,51 @@
 package ru.vihub.security.configuration;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-import ru.vihub.security.Role;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import ru.vihub.security.jwt.filter.JwtAuthenticationFilter;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
+import static ru.vihub.user.model.Role.ADMIN;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthenticationProvider authenticationProvider;
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        List<UserDetails> userDetails = new ArrayList<>();
-        userDetails.add(
-                User.builder()
-                        .username("cishy")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        userDetails.add(
-                User.builder()
-                        .username("hairloo")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        userDetails.add(
-                User.builder()
-                        .username("ScarFace163")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        userDetails.add(
-                User.builder()
-                        .username("Ramil154")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        return new InMemoryUserDetailsManager(userDetails);
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-        MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-        http.securityMatcher("/admin*")
-                        .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry ->
-                                authorizationManagerRequestMatcherRegistry
-                                        .requestMatchers(mvcMatcherBuilder.pattern("/admin*"))
-                                        .hasRole(Role.ADMIN)
-                        )
-                        .formLogin(httpSecurityFormLoginConfigurer ->
-                        httpSecurityFormLoginConfigurer
-                                .loginPage("/login")
-                                .loginProcessingUrl("/admin/login")
-                                .failureUrl("/login?failure=true")
-                )
-                .exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
-                        httpSecurityExceptionHandlingConfigurer.accessDeniedPage("/403"))
-                .csrf(AbstractHttpConfigurer::disable);
-        return http.build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.csrf(AbstractHttpConfigurer::disable)
+                    .cors(cors -> cors.configurationSource(request -> {
+                        CorsConfiguration corsConfiguration = new CorsConfiguration();
+                        corsConfiguration.setAllowedOriginPatterns(List.of("*"));
+                        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE"));
+                        corsConfiguration.setAllowedHeaders(List.of("*"));
+                        corsConfiguration.setAllowCredentials(true);
+                        return corsConfiguration;
+                    }))
+                    .authorizeHttpRequests(request -> request
+                            .requestMatchers("/auth/**").permitAll()
+                            .requestMatchers("/admin/**").hasRole(ADMIN.name())
+                            .anyRequest().authenticated()
+                    )
+                    .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
+                    .authenticationProvider(authenticationProvider)
+                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 }
