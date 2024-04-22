@@ -5,11 +5,11 @@ import lombok.*;
 @Setter
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class LoginUserDtoRequest {
+public class LoginDtoRequest {
 
-    private String login;
+    private String username;
     private String password;
 }

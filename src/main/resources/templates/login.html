@@ -12,11 +12,11 @@
 <body>
 <main class="flex-shrink-0">
     <section id="login" class="py-5">
-        <form role="form" method="POST" th:action="@{/admin/login}" th:object="${loginUserDtoRequest}" >
+        <form role="form" method="POST" th:action="@{/auth/login}" th:object="${loginDtoRequest}" >
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="validationTooltipUsername">Username or E-mail</label>
-                    <input field="*{login}" name="login" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username or E-mail" aria-describedby="validationTooltipUsernamePrepend" required>
+                    <input field="*{username}" name="username" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationTooltip01">Password</label>

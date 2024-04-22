@@ -8,9 +8,10 @@ import lombok.*;
 @Setter
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrationUserDtoRequest {
+public class RegistrationDtoRequest {
 
     @Size(min = 1, message = "Username must contains at least 1 symbol!")
     @Size(max = 20, message = "Username must contains less than 20 symbols!")
@@ -19,7 +20,7 @@ public class RegistrationUserDtoRequest {
 
     @Size(min = 4, message = "Password must contains at least 4 symbol!")
     @Size(max = 20, message = "Password must contains less than 20 symbols!")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{4,20}$", message = "Password is incorrect, try another!")
+    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "Password is incorrect, try another!")
     private String password;
 
     @Email(message = "Email is incorrect, try again!")
