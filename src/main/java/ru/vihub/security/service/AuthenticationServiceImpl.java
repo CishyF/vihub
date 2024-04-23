@@ -39,7 +39,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         );
         User user = userService.findByUsername(dto.getUsername());
         List<Token> jwts = jwtService.findByUserAndNotExpired(user);
-        if (jwtService.findByUserAndNotExpired(user).isEmpty()) {
+        if (jwts.isEmpty()) {
             String token = jwtService.generateToken(user);
             jwtService.saveToken(user, token);
             return token;
