@@ -19,7 +19,7 @@ public class AuthConfig {
     private final PasswordEncoder passwordEncoder;
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+    public UserDetailsService userDetailsService() {
         return userService.userDetailsService();
     }
 

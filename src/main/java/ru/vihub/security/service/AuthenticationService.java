@@ -1,11 +1,12 @@
 package ru.vihub.security.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.vihub.security.dto.LoginDtoRequest;
 import ru.vihub.security.dto.RegistrationDtoRequest;
 
-public interface AuthenticationService {
+public interface AuthenticationService{
 
-    String register(RegistrationDtoRequest dto);
+    void register(RegistrationDtoRequest dto);
 
-    String login(LoginDtoRequest dto);
+    void login(LoginDtoRequest dto);
 }

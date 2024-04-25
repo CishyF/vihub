@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vihub.security.dto.RegistrationDtoRequest;
 import ru.vihub.security.service.AuthenticationService;
+import ru.vihub.user.service.UserService;
 
 @Slf4j
 @Controller
@@ -26,8 +27,7 @@ public class RegistrationController {
     public String register(@Valid @ModelAttribute("registrationDtoRequest") RegistrationDtoRequest registrationDtoRequest, Model model) {
         model.addAttribute(registrationDtoRequest);
         log.info("dto: {}", registrationDtoRequest);
-        String token = authenticationService.register(registrationDtoRequest);
-        log.info("registered! token: {}", token);
+        authenticationService.register(registrationDtoRequest);
         return "redirect:/home";
     }
 }

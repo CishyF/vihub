@@ -22,8 +22,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@ModelAttribute("loginDtoRequest") LoginDtoRequest loginDtoRequest, Model model) {
-        model.addAttribute("loginDtoRequest", loginDtoRequest);
+    public String loginPost(@ModelAttribute("loginDtoRequest") LoginDtoRequest loginDtoRequest, Model model) {
+        model.addAttribute(loginDtoRequest);
         log.info("dto: {}", loginDtoRequest);
         authenticationService.login(loginDtoRequest);
         log.info("login!");

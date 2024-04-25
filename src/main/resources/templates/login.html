@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -24,6 +24,7 @@
                 </div>
             </div>
             <button id="login_button" class="btn btn-primary" type="submit">Log In</button>
+            <p>Not a member? <a th:href="@{/auth/registration}">Register</a></p>
         </form>
     </section>
 </main>
