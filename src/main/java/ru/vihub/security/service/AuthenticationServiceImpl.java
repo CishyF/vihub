@@ -19,26 +19,14 @@ import java.util.Optional;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserService userService;
-    private final AuthenticationManager authenticationManager;
 
     @Override
     public void register(RegistrationDtoRequest dto) {
         userService.createUser(dto);
-        //loadUserByUsername(dto.getUsername());
-        //authenticateUser(dto.getUsername(), dto.getPassword());
     }
 
     @Override
     public void login(LoginDtoRequest dto) {
-        //loadUserByUsername(dto.getUsername());
-        //authenticateUser(dto.getUsername(), dto.getPassword());
-        //User user = userService.findByUsername(dto.getUsername());
-    }
 
-//    private void authenticateUser(String username, String password){
-//        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//    }
-//    private void loadUserByUsername(String username){
-//        userService.loadUserByUsername(username);
-//    }
+    }
 }

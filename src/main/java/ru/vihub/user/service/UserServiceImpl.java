@@ -43,9 +43,4 @@ public class UserServiceImpl implements UserService {
     public UserDetailsService userDetailsService() {
         return this::findByUsername;
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return findByUsername(username);
-    }
 }

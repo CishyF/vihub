@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.vihub.security.dto.RegistrationDtoRequest;
 import ru.vihub.user.model.User;
 
-public interface UserService extends UserDetailsService{
+public interface UserService{
 
 
     User findByUsername(String username);
