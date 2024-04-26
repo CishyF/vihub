@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +21,7 @@ public class RegistrationController {
 
     @GetMapping
     public String register() {
+        log.info("Пришел GET-запрос /auth/registration без тела");
         return "registration";
     }
 
@@ -29,9 +29,10 @@ public class RegistrationController {
     public String register(@Valid @ModelAttribute("registrationDtoRequest") RegistrationDtoRequest registrationDtoRequest,
                            Model model, HttpServletRequest request) throws ServletException {
         model.addAttribute(registrationDtoRequest);
-        log.info("dto: {}", registrationDtoRequest);
+        log.info("Пришел POST-запрос /auth/registration с телом={}", registrationDtoRequest);
         authenticationService.register(registrationDtoRequest);
-        request.login(registrationDtoRequest.getUsername(),registrationDtoRequest.getPassword());
+        request.login(registrationDtoRequest.getUsername(), registrationDtoRequest.getPassword());
+        log.info("Успешная регистрация и перенаправление POST-запроса /auth/registration с телом={} в /home", registrationDtoRequest);
         return "redirect:/home";
     }
 }
