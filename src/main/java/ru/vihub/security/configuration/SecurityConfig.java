@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static ru.vihub.user.model.Role.ADMIN;
@@ -22,8 +21,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
-                    .authorizeHttpRequests(request -> request
+        return http.authorizeHttpRequests(request -> request
                             .requestMatchers("/stylesheet/**", "/images/**", "/auth/**", "/recommendations", "/home").permitAll()
                             .requestMatchers("/admin/**", "/subscriptions", "/profile").hasRole(ADMIN.name())
                             .anyRequest().authenticated()

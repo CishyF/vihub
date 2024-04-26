@@ -19,11 +19,9 @@ import ru.vihub.security.service.AuthenticationService;
 public class RegistrationController {
 
     private final AuthenticationService authenticationService;
-    private final AuthenticationManager authenticationManager;
 
     @GetMapping
     public String register() {
-
         return "registration";
     }
 
