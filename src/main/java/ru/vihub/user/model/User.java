@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.vihub.video.model.Video;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,6 +37,9 @@ public class User implements UserDetails {
 
     @Column(name = "lastname")
     private String lastname;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisher")
+    private List<Video> videoList;
 
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
