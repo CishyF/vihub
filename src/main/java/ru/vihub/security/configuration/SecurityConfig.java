@@ -1,59 +1,34 @@
 package ru.vihub.security.configuration;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import ru.vihub.security.Role;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import static ru.vihub.user.model.Role.ADMIN;
 
 @Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    private final AuthenticationProvider authenticationProvider;
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        List<UserDetails> userDetails = new ArrayList<>();
-        userDetails.add(
-                User.builder()
-                        .username("cishy")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        userDetails.add(
-                User.builder()
-                        .username("hairloo")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        userDetails.add(
-                User.builder()
-                        .username("ScarFace163")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        userDetails.add(
-                User.builder()
-                        .username("Ramil154")
-                        .password(passwordEncoder.encode("root"))
-                        .authorities(Collections.singletonList(new SimpleGrantedAuthority(Role.ADMIN)))
-                        .build()
-        );
-        return new InMemoryUserDetailsManager(userDetails);
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.authorizeHttpRequests(request -> request
+                            .requestMatchers("/stylesheet/**", "/images/**", "/auth/**", "/recommendations", "/home").permitAll()
+                            .requestMatchers("/admin/**", "/subscriptions", "/profile").hasRole(ADMIN.name())
+                            .anyRequest().authenticated()
+                    )
+                    .formLogin(form -> form.loginPage("/auth/login").permitAll().loginProcessingUrl("/auth/login")
+                            .defaultSuccessUrl("/home", true))
+                    .authenticationProvider(authenticationProvider)
+                .build();
     }
 }
