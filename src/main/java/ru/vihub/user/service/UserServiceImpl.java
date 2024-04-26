@@ -9,6 +9,8 @@ import ru.vihub.exception.EntityNotFoundException;
 import ru.vihub.user.model.User;
 import ru.vihub.user.repository.UserRepository;
 
+import java.util.ArrayList;
+
 import static ru.vihub.user.model.Role.ADMIN;
 
 @Service
@@ -19,8 +21,8 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username)
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));
     }
 
@@ -33,12 +35,13 @@ public class UserServiceImpl implements UserService {
                 .lastname(dto.getLastname())
                 .password(passwordEncoder.encode(dto.getPassword()))
                 .role(ADMIN)
+                .videoList(new ArrayList<>())
                 .build();
         return userRepository.save(user);
     }
 
     @Override
     public UserDetailsService userDetailsService() {
-        return this::findByUsername;
+        return this::findUserByUsername;
     }
 }
