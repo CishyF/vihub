@@ -1,5 +1,7 @@
 package ru.vihub.security.controller;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,10 +24,11 @@ public class LoginController {
     }
 
     @PostMapping
-    public String loginPost(@ModelAttribute("loginDtoRequest") LoginDtoRequest loginDtoRequest, Model model) {
+    public String loginPost(@ModelAttribute("loginDtoRequest") LoginDtoRequest loginDtoRequest,
+                            Model model, HttpServletRequest request) throws ServletException {
         model.addAttribute(loginDtoRequest);
         log.info("dto: {}", loginDtoRequest);
-        authenticationService.login(loginDtoRequest);
+        request.login(loginDtoRequest.getUsername(),loginDtoRequest.getPassword());
         log.info("login!");
         return "redirect:/home";
     }
