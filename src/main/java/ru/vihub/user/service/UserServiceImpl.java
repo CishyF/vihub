@@ -1,13 +1,11 @@
 package ru.vihub.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.vihub.security.dto.RegistrationDtoRequest;
-import ru.vihub.security.exception.EntityNotFoundException;
+import ru.vihub.exception.EntityNotFoundException;
 import ru.vihub.user.model.User;
 import ru.vihub.user.repository.UserRepository;
 

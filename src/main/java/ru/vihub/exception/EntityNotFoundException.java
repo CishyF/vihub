@@ -1,4 +1,4 @@
-package ru.vihub.security.exception;
+package ru.vihub.exception;
 
 public class EntityNotFoundException extends RuntimeException {
 
