@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка файла MP4</title>
+</head>
+<body>
+<form th:action="@{/add_video}" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".txt"/>
+    <button type="submit">Загрузить файл</button>
+</form>
+</body>
+</html>
