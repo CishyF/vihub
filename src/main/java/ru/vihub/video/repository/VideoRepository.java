@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface VideoRepository extends JpaRepository<Video, Long> {
     @Override
-    Optional<Video> findById(Long aLong);
+    Optional<Video> findById(Long id);
 
     @Override
     List<Video> findAll();

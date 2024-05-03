@@ -20,8 +20,13 @@ public class VideoServiceImpl implements VideoService{
     private final VideoRepository repository;
     @Override
     public VideoDtoResponse findById(Long id) {
-        Video video = repository.findById(id).isPresent() ? null : repository.findById(id).get();
-        return VideoMapper.mapToVideoDtoResponse(video);
+        if(repository.findById(id).isPresent()){
+            return VideoMapper.mapToVideoDtoResponse(repository.findById(id).get());
+        }
+        return null;
+//throw new Exception;
+//        Video video = repository.findById(id).isPresent() ? repository.findById(id).get();
+//        return VideoMapper.mapToVideoDtoResponse(video);
     }
 
     @Override
