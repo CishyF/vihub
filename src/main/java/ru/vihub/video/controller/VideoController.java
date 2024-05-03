@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.vihub.video.dto.VideoDtoResponse;
 import ru.vihub.video.service.VideoService;
 
@@ -22,5 +22,16 @@ public class VideoController {
         log.info("Dto из репозитория{}", dto);
         model.addAttribute("video", dto);
         return "video";
+    }
+
+    @GetMapping("/add_video")
+    public String getAddVideoPage(){
+        return "add-video";
+    }
+
+    @PostMapping("/add_video")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+        videoService.addVideoToLocalStorage(file);
+        return "redirect:/home";
     }
 }
