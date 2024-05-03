@@ -11,7 +11,20 @@
     <title>Recommendation Page</title>
     <link rel="stylesheet" th:href="@{/bootstrap.css}" />
     <style>
-        @import "/stylesheet/bootstrap.css";
+        .preview-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+        }
+        .preview-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -23,29 +36,17 @@
                 <p class="lead fw-normal text-black-50 mb-0">your recommendations:</p>
             </div>
         </div>
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div th:each="video:${videoRecommendationDtoResponses}" class="card">
-<!--                        <div id="videoTemplate" class="position-relative mb-5">-->
-                            <!-- Video image-->
-                            <img th:src="${video.url}" height="300" class="card-img-top" alt="...">
-                            <!-- Video details-->
-                            <div  class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Video name-->
-                                    <h5 th:text="${video.title}" class="fw-bolder">Криминальное чтиво</h5>
-                                    <a th:text="${video.description}">Description</a>
-                                </div>
-                            </div>
-                            <!-- Video actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View Film</a></div>
-                            </div>
-<!--                        </div>-->
 
+        <div class="row gx-5">
+            <div th:href="@{/watch/{id}(id=${video.id})}" th:each="video :${videoRecommendationDtoResponses}" class="col-lg-4 mb-4">
+                    <div id="videoTemplate" class="position-relative mb-5">
+                        <div class="preview-container">
+                            <img class="img-fluid rounded-3 mb-3"
+                                 th:src="${video.url}" alt="..." />
+                        </div>
+                        <a th:text="${video.title}"  class="h3 fw-bolder text-decoration-none link-dark stretched-link caption" th:href="@{/watch/{id}(id=${video.id})}">Project name</a>
+                        <!--                    <a th:text="${video.description}"  class="h3 fw-bolder text-decoration-none link-dark stretched-link caption" href="#!">Project name</a>-->
                     </div>
-                </div>
             </div>
         </div>
     </section>
