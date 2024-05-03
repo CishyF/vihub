@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VideoRecommendationDtoResponse {
-
+    private long id;
     private String title;
     private String url;
     private String description;
