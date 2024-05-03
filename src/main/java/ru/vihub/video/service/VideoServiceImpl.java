@@ -3,6 +3,7 @@ package ru.vihub.video.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.vihub.user.model.User;
 import ru.vihub.video.dto.VideoDtoRequest;
 import ru.vihub.video.dto.VideoDtoResponse;
@@ -11,12 +12,16 @@ import ru.vihub.video.mapper.VideoMapper;
 import ru.vihub.video.model.Video;
 import ru.vihub.video.repository.VideoRepository;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class VideoServiceImpl implements VideoService{
+
     private final VideoRepository repository;
     @Override
     public VideoDtoResponse findById(Long id) {
@@ -52,5 +57,25 @@ public class VideoServiceImpl implements VideoService{
     private int countDuration(String videoUrl){
         //todo
         return 0;
+    }
+
+    @Override
+    public void addVideoToLocalStorage(MultipartFile file) {
+        try {
+            String fileName = file.getOriginalFilename();
+            //byte[] fileData = file.getBytes();
+
+
+            //закгрузка в файл
+            File convertFile = new File("D:\\VihubFiles\\" + fileName);
+            convertFile.createNewFile();
+            Files.write(convertFile.toPath(), file.getBytes());
+
+
+            //загрузка в бд
+            //videoService.createVideo()
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
