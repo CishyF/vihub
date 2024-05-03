@@ -65,6 +65,7 @@ public class UserServiceImpl implements UserService {
         user.setId(userPrevious.getId());
         user.setRole(userPrevious.getRole());
         user.setPassword(userPrevious.getPassword());
+        user.setPhotoUrl(userPrevious.getPhotoUrl());
         log.info("user{}", user);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         ((User) principal).setUsername(user.getUsername());
