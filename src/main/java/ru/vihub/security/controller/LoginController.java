@@ -33,6 +33,6 @@ public class LoginController {
     @GetMapping("auth/logout")
     public String logout(HttpServletRequest request) throws ServletException {
         request.logout();
-        return "redirect:/auth/login";
+        return "redirect:/home";
     }
 }
