@@ -54,8 +54,8 @@ public class Video {
     @Column(name = "created_on")
     private LocalDateTime createdOn;
 
-//    @JoinColumn(name = "comments", unique = true)
-//    @OneToMany
-//    private List<Comment> comments;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comments")
+    private List<Comment> comments;
 
 }
