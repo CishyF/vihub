@@ -74,4 +74,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
+    @Override
+    public UserDto findCurrentUser(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) principal;
+        long id = user.getId();
+        return findById(id);
+    }
 }
