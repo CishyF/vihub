@@ -1,13 +1,9 @@
 package ru.vihub.video.mapper;
 
-import ru.vihub.video.dto.CommentDtoResponse;
-import ru.vihub.video.dto.VideoDtoRequest;
-import ru.vihub.video.dto.VideoDtoResponse;
-import ru.vihub.video.dto.VideoRecommendationDtoResponse;
+import ru.vihub.video.dto.*;
 import ru.vihub.video.model.Video;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VideoMapper {
     public static VideoRecommendationDtoResponse mapToVideoRecommendationDtoResponse(Video video){
@@ -15,14 +11,14 @@ public class VideoMapper {
                 .id(video.getId())
                 .title(video.getTitle())
                 .description(video.getDescription())
-                .url(video.getUrl())
                 .build();
         return dto;
     }
     public static VideoDtoResponse mapToVideoDtoResponse(Video video) {
-        //List<CommentDtoResponse> commentDtoResponseList = video.getComments().stream()
-                //.map((CommentMapper::mapToCommentDtoResponse)).toList();
+//        List<CommentDtoResponse> commentDtoResponseList = video.getComments().stream()
+//                .map((CommentMapper::mapToCommentDtoResponse)).toList();
         VideoDtoResponse dto = VideoDtoResponse.builder()
+                .id(video.getId())
                 .title(video.getTitle())
                 .description(video.getDescription())
                 //.publisher(video.getPublisher())
@@ -30,8 +26,20 @@ public class VideoMapper {
                 .likesNumber(video.getLikesNumber())
                 .dislikesNumber(video.getDislikesNumber())
                 .viewersNumber(video.getViewersNumber())
-                .url(video.getUrl())
                 //.commentDtoResponses(commentDtoResponseList)
+                .preview(video.getPreview())
+                .build();
+        return dto;
+    }
+
+    public static VideoWatchDtoResponse mapToVideoWatchDtoResponse(Video video){
+        VideoWatchDtoResponse dto = VideoWatchDtoResponse.builder()
+                .id(video.getId())
+                .videoData(video.getVideoData())
+                .name(video.getName())
+                .contentType(video.getContentType())
+                .size(video.getSize())
+                .originalFileName(video.getOriginalFileName())
                 .build();
         return dto;
     }
