@@ -42,7 +42,7 @@
                     <div id="videoTemplate" class="position-relative mb-5">
                         <div class="preview-container">
                             <img class="img-fluid rounded-3 mb-3"
-                                 th:src="${video.url}" alt="..." />
+                                 th:src="@{/video/preview/{id}(id=${video.id})}" alt="..." />
                         </div>
                         <a th:text="${video.title}"  class="h3 fw-bolder text-decoration-none link-dark stretched-link caption" th:href="@{/watch/{id}(id=${video.id})}">Project name</a>
                         <!--                    <a th:text="${video.description}"  class="h3 fw-bolder text-decoration-none link-dark stretched-link caption" href="#!">Project name</a>-->
