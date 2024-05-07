@@ -3,7 +3,7 @@ package ru.vihub.video.model;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import ru.vihub.image.model.Image;
 import ru.vihub.user.model.User;
 
 import java.time.LocalDateTime;
@@ -22,11 +22,14 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String name;
+
+    private String originalFileName;
+
+    private String contentType;
+
     @Column(name = "title")
     private String title;
-
-    @Column(name = "url")
-    private String url;
 
     @Column(name = "description")
     private String description;
@@ -57,5 +60,12 @@ public class Video {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "comments")
     private List<Comment> comments;
+
+    @Column(name = "videoData")
+    @Lob
+    private byte[] videoData;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Image preview;
 
 }
