@@ -23,7 +23,7 @@
             padding-top: 56.25%;
             overflow: hidden;
         }
-        .video-container img {
+        .video-container video {
             position: absolute;
             top: 0;
             left: 0;
@@ -125,7 +125,10 @@
             <!-- Место для видео -->
             <div class="col-lg-8">
                 <div class="video-container">
-                    <a href="#!"><img class="card-img-top" th:src="${video.url}" alt="..." /></a>
+                    <a href="#!">
+                        <video class="card-img-top" autoplay controls th:src="@{/video/watch/{id}(id=${video.id})}" type="video/mp4"></video>
+                    </a>
+<!--                    <a href="#!"><img class="card-img-top" th:src="@{/video/watch/{id}(id=${video.id})}" alt="..." /></a>-->
                 </div>
                 <div class="video-info mt-3">
                     <h1 class="fw-bolder" th:text="${video.title}"></h1>
@@ -188,6 +191,12 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.js"></script>
     <script>
+
+        var imageBase64 = $('imageBase64').val();
+        var imagePreview= document.getElementById('image');
+        if(imagePreview) {
+            imagePreview.src = "data:image/jpeg;base64," + imageBase64;
+        }
         // Моделирование работы кнопок лайка и дизлайка
         document.querySelector('.like-btn').addEventListener('click', function() {
             var likesCount = parseInt(document.querySelector('.likes').textContent);
