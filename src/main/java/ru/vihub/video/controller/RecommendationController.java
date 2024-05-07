@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.vihub.video.dto.VideoRecommendationDtoResponse;
+import ru.vihub.video.mapper.VideoMapper;
 import ru.vihub.video.service.VideoService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -20,7 +22,7 @@ public class RecommendationController {
 
     @GetMapping
     public String recommendationsPage(Model model){
-        List<VideoRecommendationDtoResponse> videoRecommendationDtoResponses = videoService.findAllVideos();
+        List<VideoRecommendationDtoResponse> videoRecommendationDtoResponses = videoService.findAllVideos().stream().map((VideoMapper::mapToVideoRecommendationDtoResponse)).collect(Collectors.toList());
         model.addAttribute("videoRecommendationDtoResponses", videoRecommendationDtoResponses);
         log.info("Get recommendations page");
         return "recommendations";
