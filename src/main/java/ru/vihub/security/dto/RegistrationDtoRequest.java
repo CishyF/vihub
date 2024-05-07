@@ -13,22 +13,22 @@ import lombok.*;
 @AllArgsConstructor
 public class RegistrationDtoRequest {
 
-    @Size(min = 1, message = "Username must contains at least 1 symbol!")
-    @Size(max = 20, message = "Username must contains less than 20 symbols!")
-    @Pattern(regexp = "^[A-Za-z][A-Za-z0-9_]{1,20}$", message = "Username is incorrect, try another!")
+    @Size(min = 1, message = "Имя пользователя должно содержать как минимум 1 символ")
+    @Size(max = 20, message = "Имя пользователя не должно содержпть более 20 символов")
+    @Pattern(regexp = "^[A-Za-z][A-Za-z0-9_]{1,20}$", message = "Имя пользователя некорректно, попробуйте другое!")
     private String username;
 
-    @Size(min = 4, message = "Password must contains at least 4 symbol!")
-    @Size(max = 20, message = "Password must contains less than 20 symbols!")
-    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "Password is incorrect, try another!")
+    @Size(min = 4, message = "Пароль должен содержать минимум 4 символа")
+    @Size(max = 20, message = "Пароль не должен содержать более 20 символов")
+    @Pattern(regexp = "^[a-zA-Z0-9]{4,20}$", message = "Пароль некорректен, попробуйте другой!")
     private String password;
 
-    @Email(message = "Email is incorrect, try again!")
+    @Email(message = "Почта некорректна, попробуйте другую!")
     private String email;
 
-    @Pattern(regexp = "^[A-Za-z]{2,30}$", message = "Firstname is incorrect, try another!")
+    @Pattern(regexp = "^[А-Яа-я]{2,30}$", message = "Имя некорректно, попробуйте другое!")
     private String firstname;
 
-    @Pattern(regexp = "^[A-Za-z]{2,30}$", message = "Lastname is incorrect, try another!")
+    @Pattern(regexp = "^[А-Яа-я]{2,30}$", message = "Фамилия некорректна, попробуйте другую!")
     private String lastname;
 }
