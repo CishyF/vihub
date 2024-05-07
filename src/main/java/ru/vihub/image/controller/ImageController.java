@@ -15,7 +15,8 @@ import java.io.ByteArrayInputStream;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class ImageContoller {
+public class ImageController {
+
     private final VideoService videoService;
 
     @GetMapping("/video/preview/{id}")
