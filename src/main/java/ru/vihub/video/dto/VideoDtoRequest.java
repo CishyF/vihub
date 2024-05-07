@@ -3,7 +3,6 @@ package ru.vihub.video.dto;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.validator.constraints.URL;
 @Setter
 @Getter
 @Builder
@@ -15,9 +14,5 @@ public class VideoDtoRequest {
     @Size(max = 70, message = "Title must contains less than 70 symbols!")
     @Pattern(regexp = "^[A-Za-z][A-Za-z0-9_]{1,100}$", message = "Title is incorrect, try another!")
     private String title;
-
     private String description;
-
-    @URL(message = "URL is incorrect, try again!")
-    private String url;
 }
