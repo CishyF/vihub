@@ -48,8 +48,8 @@ public class User implements UserDetails {
   @Column(name = "instagram")
   private String instagram;
 
-  @Column(name = "facebook")
-  private String facebook;
+  @Column(name = "telegram")
+  private String telegram;
 
   @Column(name = "photoUrl")
   private String photoUrl;

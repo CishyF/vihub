@@ -54,7 +54,7 @@
                                 <p th:if="${#fields.hasErrors('address')}" class = "text-danger" th:errors = "*{address}"></div>
                             <div class="col-md-12"><label class="labels">GitHub</label><input type="text" class="form-control"  id="github" name="github" placeholder="Введите gitHub" th:value="${user.github}">
                             <div class="col-md-12"><label class="labels">Instagram</label><input type="text" class="form-control"  id="instagram" name="instagram" placeholder="Введите instagram" th:value="${user.instagram}"></div>
-                            <div class="col-md-12"><label class="labels">Facebook</label><input type="text" class="form-control"  id="facebook" name="facebook" placeholder="Введите facebook" th:value="${user.facebook}"></div>
+                            <div class="col-md-12"><label class="labels">Telegram</label><input type="text" class="form-control"  id="telegram" name="telegram" placeholder="Введите telegram" th:value="${user.telegram}"></div>
                         </div>
                         <div class="mt-5 text-center"><button type="submit" class="btn btn-primary">Сохранить</button>
                             <a class="btn btn-primary " th:href = "@{/profile}">Назад</a>

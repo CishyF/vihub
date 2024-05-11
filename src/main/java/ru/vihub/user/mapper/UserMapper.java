@@ -16,7 +16,7 @@ public class UserMapper {
         .address(userDto.getAddress())
         .github(userDto.getGithub())
         .instagram(userDto.getInstagram())
-        .facebook(userDto.getFacebook())
+        .telegram(userDto.getTelegram())
         .photoUrl(userDto.getPhotoUrl())
         .build();
   }
@@ -33,7 +33,7 @@ public class UserMapper {
         .address(user.getAddress())
         .github(user.getGithub())
         .instagram(user.getInstagram())
-        .facebook(user.getFacebook())
+        .telegram(user.getTelegram())
         .photoUrl(user.getPhotoUrl())
         .build();
   }
