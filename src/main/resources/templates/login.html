@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/bootstrap.css}"/>
     <style>
         @import "/stylesheet/bootstrap.css";
     </style>
@@ -12,15 +12,18 @@
 <body>
 <main class="flex-shrink-0">
     <section id="login" class="py-5">
-        <form role="form" method="POST" th:action="@{/auth/login}" th:object="${loginDtoRequest}" >
+        <form role="form" method="POST" th:action="@{/auth/login}" th:object="${loginDtoRequest}">
             <div class="form-row">
                 <div class="col-md-4 mb-3">
                     <label for="validationTooltipUsername">Username or E-mail</label>
-                    <input field="*{username}" name="username" type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                    <input field="*{username}" name="username" type="text" class="form-control"
+                           id="validationTooltipUsername" placeholder="Username"
+                           aria-describedby="validationTooltipUsernamePrepend" required>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationTooltip01">Password</label>
-                    <input field="*{password}" name="password" type="password" class="form-control" id="validationTooltip01" placeholder="Password" required>
+                    <input field="*{password}" name="password" type="password" class="form-control"
+                           id="validationTooltip01" placeholder="Password" required>
                 </div>
             </div>
             <button id="login_button" class="btn btn-primary" type="submit">Log In</button>
