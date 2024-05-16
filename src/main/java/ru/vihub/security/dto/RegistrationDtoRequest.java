@@ -26,9 +26,9 @@ public class RegistrationDtoRequest {
     @Email(message = "Почта некорректна, попробуйте другую!")
     private String email;
 
-    @Pattern(regexp = "^[А-Яа-я]{2,30}$", message = "Имя некорректно, попробуйте другое!")
+    @Pattern(regexp = "^[А-Яа-яA-Za-z]{2,30}$", message = "Имя некорректно, попробуйте другое!")
     private String firstname;
 
-    @Pattern(regexp = "^[А-Яа-я]{2,30}$", message = "Фамилия некорректна, попробуйте другую!")
+    @Pattern(regexp = "^[А-Яа-яA-Za-z]{2,30}$", message = "Фамилия некорректна, попробуйте другую!")
     private String lastname;
 }
