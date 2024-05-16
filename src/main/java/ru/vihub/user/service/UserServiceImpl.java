@@ -80,6 +80,19 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  public boolean checkPassword(String password) {
+    User user = findCurrentUser();
+    return passwordEncoder.matches(password, user.getPassword());
+  }
+
+  @Override
+  public void changeUserPassword(String newPassword) {
+    User user = findCurrentUser();
+    user.setPassword(passwordEncoder.encode(newPassword));
+    userRepository.save(user);
+  }
+
+  @Override
   public User findCurrentUser() {
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     return userRepository

@@ -17,4 +17,8 @@ public interface UserService {
   UserDetailsService userDetailsService();
 
   void updateUser(UserDto userDto);
+
+  boolean checkPassword(String password);
+
+  void changeUserPassword(String newPassword);
 }
