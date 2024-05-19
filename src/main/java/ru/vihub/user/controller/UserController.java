@@ -11,9 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.vihub.exception.EntityNotFoundException;
 import ru.vihub.user.dto.PasswordChangeDto;
 import ru.vihub.user.dto.UserDto;
 import ru.vihub.user.service.UserService;
+
+import java.util.Objects;
+
 import static ru.vihub.user.mapper.UserMapper.mapToUserDto;
 
 @Controller
@@ -36,19 +40,31 @@ public class UserController {
 
   @GetMapping("/profile/edit")
   public String getProfileEdit(Model model) {
-    model.addAttribute("user", mapToUserDto(userService.findCurrentUser()));
+    model.addAttribute("userForEdit", userService.findCurrentUser());
+    model.addAttribute("userForDisplay", userService.findCurrentUser());
     return "profile-edit";
   }
 
   @PostMapping("/profile/edit")
   public String updateProfile(
-      @Valid @ModelAttribute("user") UserDto userDto, BindingResult result, Model model) {
+      @Valid @ModelAttribute("userForEdit") UserDto userDto, BindingResult result, Model model) {
     if (result.hasErrors()) {
-      model.addAttribute("user", userDto);
+      model.addAttribute("userForEdit", userDto);
+      model.addAttribute("userForDisplay", userService.findCurrentUser());
       return "profile-edit";
     }
-    log.info("userDto {}", userDto);
-    userService.updateUser(userDto);
+    try{
+      if (userService.findByUsername(userDto.getUsername()) != null
+          && !Objects.equals(userService.findCurrentUser().getUsername(), userDto.getUsername())) {
+        model.addAttribute("error", "Пользовтаель с таким именем уже существует");
+        model.addAttribute("userForDisplay", userService.findCurrentUser());
+        return "profile-edit";
+        }
+    } catch(EntityNotFoundException ex){
+      log.info("userDto {}", userDto);
+      userService.updateUser(userDto);
+      return "redirect:/profile";
+    }
     return "redirect:/profile";
   }
 
