@@ -97,7 +97,6 @@ body {
     font-weight: var(--bs-body-font-weight);
     line-height: var(--bs-body-line-height);
     color: var(--bs-body-color);
-    text-align: var(--bs-body-text-align);
     background-color: var(--bs-body-bg);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -3242,6 +3241,25 @@ textarea.form-control-lg {
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #7f7ff3;
     --bs-btn-disabled-border-color: #7f7ff3;
+}
+.btn-danger-password {
+    align-items: center;
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #dc3545;
+    --bs-btn-border-color: #dc3545;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #bb2d3b;
+    --bs-btn-hover-border-color: #b02a37;
+    --bs-btn-focus-shadow-rgb: 225, 83, 97;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #b02a37;
+    --bs-btn-active-border-color: #a52834;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    width: 700px;
+    height: 50px;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #dc3545;
+    --bs-btn-disabled-border-color: #dc3545;
 }
 
 .btn-secondary {
@@ -12543,7 +12561,8 @@ html {
 .input-box {
     align-self: center;
     box-sizing: border-box;
-    border: solid #000000;
+    border: solid rgba(0, 0, 0, 0.31);
+    border-width: 2px;
     background: #fff;
     width: 700px;
     max-width: 1000px;
