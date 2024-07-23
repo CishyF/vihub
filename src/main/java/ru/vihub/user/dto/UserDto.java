@@ -24,6 +24,8 @@ public class UserDto {
   private String password;
 
   @Email(message = "Почта некорректна, попробуйте другую!")
+  @Size(min = 4, message = "Почта должна содержать минимум 4 символа")
+  @Size(max = 35, message = "Почта не должна содержать более 35 символов")
   private String email;
 
   @Pattern(regexp = "^[A-Za-zА-Яа-я]{2,30}$", message = "Имя некорректно, попробуйте другое!")
