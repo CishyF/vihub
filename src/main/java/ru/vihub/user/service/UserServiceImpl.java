@@ -14,7 +14,12 @@ import ru.vihub.user.dto.UserDto;
 import ru.vihub.user.model.User;
 import ru.vihub.user.repository.UserRepository;
 
+
+import java.util.ArrayList;
+
+
 import static ru.vihub.user.mapper.UserMapper.mapToUser;
+
 import static ru.vihub.user.model.Role.ADMIN;
 
 @Slf4j
@@ -22,15 +27,35 @@ import static ru.vihub.user.model.Role.ADMIN;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-  private final UserRepository userRepository;
-  private final PasswordEncoder passwordEncoder;
 
-  @Override
-  public User findByUsername(String username) {
-    return userRepository
-        .findByUsername(username)
-        .orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));
-  }
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("Пользователь не найден"));
+    }
+
+    @Override
+    public User createUser(RegistrationDtoRequest dto) {
+        User user = User.builder()
+                .username(dto.getUsername())
+                .email(dto.getEmail())
+                .firstname(dto.getFirstname())
+                .lastname(dto.getLastname())
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .role(ADMIN)
+                .videoList(new ArrayList<>())
+                .build();
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return this::findUserByUsername;
+    }
+
 
   @Override
   public User findById(long id) {
@@ -40,24 +65,6 @@ public class UserServiceImpl implements UserService {
             () -> new EntityNotFoundException(String.format("There is no user with id=%d", id)));
   }
 
-  @Override
-  public User createUser(RegistrationDtoRequest dto) {
-    User user =
-        User.builder()
-            .username(dto.getUsername())
-            .email(dto.getEmail())
-            .firstname(dto.getFirstname())
-            .lastname(dto.getLastname())
-            .password(passwordEncoder.encode(dto.getPassword()))
-            .role(ADMIN)
-            .build();
-    return userRepository.save(user);
-  }
-
-  @Override
-  public UserDetailsService userDetailsService() {
-    return this::findByUsername;
-  }
 
   @Override
   public void updateUser(UserDto userDto) {

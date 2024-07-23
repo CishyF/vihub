@@ -7,6 +7,7 @@ import ru.vihub.user.model.User;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-  Optional<User> findByUsername(String username);
+
+public interface UserRepository extends JpaRepository<User, UUID> {
+    Optional<User> findUserByUsername(String username);
 }

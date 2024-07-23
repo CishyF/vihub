@@ -16,6 +16,5 @@ public class MvcConfig implements WebMvcConfigurer {
         for (String url : HOME_URLS) {
             registry.addViewController(url).setViewName("home");
         }
-        registry.addViewController("/recommendations").setViewName("recommendations");
     }
 }

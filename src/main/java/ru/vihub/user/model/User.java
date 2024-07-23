@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import ru.vihub.video.model.Video;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,6 +18,7 @@ import java.util.Collection;
 @AllArgsConstructor
 @Table(name = "\"user\"")
 public class User implements UserDetails {
+
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,6 +60,9 @@ public class User implements UserDetails {
   @Column(name = "role")
   @Enumerated(value = EnumType.STRING)
   private Role role;
+  
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisher")
+    private List<Video> videoList;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

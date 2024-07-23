@@ -5,12 +5,18 @@ import ru.vihub.security.dto.RegistrationDtoRequest;
 import ru.vihub.user.dto.UserDto;
 import ru.vihub.user.model.User;
 
-public interface UserService {
-  User findByUsername(String username);
+
+
+public interface UserService{
+
 
   User findById(long id);
 
+
+  User findUserByUsername(String username);
+
   User createUser(RegistrationDtoRequest dto);
+
 
   User findCurrentUser();
 

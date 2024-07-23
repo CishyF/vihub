@@ -11,14 +11,15 @@
 </head>
 
 <nav id="navbar" class="height90">
-    <a th:href="@{/home}">
-        <img id="logo-at-navbar" th:src="@{../images/ViHubLogoWhite.png}" alt="ViHub Logo">
-    </a>
-    <div id="sections">
-        <a th:href="@{/subscriptions}">Подписки</a>
-        <a th:href="@{/recommendations}">Рекомендации</a>
-        <a th:href="@{/profile}">Профиль</a>
-    </div>
+  <a th:href="@{/home}">
+    <img id="logo-at-navbar" th:src="@{../images/ViHubLogoWhite.png}" alt="ViHub Logo">
+  </a>
+  <div id="sections">
+    <a th:href="@{/add_video}">+</a>
+    <a th:href="@{/subscriptions}">Подписки</a>
+    <a th:href="@{/recommendations}">Рекомендации</a>
+    <a th:href="@{/profile}">Профиль</a>
+  </div>
 </nav>
 <body layout:fragment="body"></body>
 <footer class="bg-blue py-4 mt-auto height90">
