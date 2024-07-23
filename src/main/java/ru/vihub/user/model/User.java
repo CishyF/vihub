@@ -19,64 +19,83 @@ import java.util.List;
 @Table(name = "\"user\"")
 public class User implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
-    @Column(name = "username", unique = true)
-    private String username;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @Column(name = "password")
-    private String password;
+  @Column(name = "username", unique = true)
+  private String username;
 
-    @Column(name = "email", unique = true)
-    private String email;
+  @Column(name = "password")
+  private String password;
 
-    @Column(name = "firstname")
-    private String firstname;
+  @Column(name = "email", unique = true)
+  private String email;
 
-    @Column(name = "lastname")
-    private String lastname;
+  @Column(name = "firstname")
+  private String firstname;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisher")
+  @Column(name = "lastname")
+  private String lastname;
+
+  @Column(name = "phone")
+  private String phone;
+
+  @Column(name = "address")
+  private String address;
+
+  @Column(name = "github")
+  private String github;
+
+  @Column(name = "instagram")
+  private String instagram;
+
+  @Column(name = "telegram")
+  private String telegram;
+
+  @Column(name = "photoUrl")
+  private String photoUrl;
+
+  @Column(name = "role")
+  @Enumerated(value = EnumType.STRING)
+  private Role role;
+  
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisher")
     private List<Video> videoList;
 
-    @Column(name = "role")
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return role.getAuthorities();
+  }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getAuthorities();
-    }
+  @Override
+  public String getPassword() {
+    return String.valueOf(password);
+  }
 
-    @Override
-    public String getPassword() {
-        return String.valueOf(password);
-    }
+  @Override
+  public String getUsername() {
+    return username;
+  }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 }

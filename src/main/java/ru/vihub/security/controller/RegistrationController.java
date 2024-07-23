@@ -27,7 +27,7 @@ public class RegistrationController {
 
     @PostMapping
     public String register(@Valid @ModelAttribute("registrationDtoRequest") RegistrationDtoRequest registrationDtoRequest,
-                           Model model, HttpServletRequest request) throws ServletException {
+                           Model model,HttpServletRequest request) throws ServletException {
         model.addAttribute(registrationDtoRequest);
         log.info("Пришел POST-запрос /auth/registration с телом={}", registrationDtoRequest);
         authenticationService.register(registrationDtoRequest);
