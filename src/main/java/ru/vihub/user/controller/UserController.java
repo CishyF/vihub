@@ -54,7 +54,7 @@ public class UserController {
       return "profile-edit";
     }
     try{
-      if (userService.findByUsername(userDto.getUsername()) != null
+      if (userService.findUserByUsername(userDto.getUsername()) != null
           && !Objects.equals(userService.findCurrentUser().getUsername(), userDto.getUsername())) {
         model.addAttribute("error", "Пользовтаель с таким именем уже существует");
         model.addAttribute("userForDisplay", userService.findCurrentUser());
@@ -65,6 +65,7 @@ public class UserController {
       userService.updateUser(userDto);
       return "redirect:/profile";
     }
+    userService.updateUser(userDto);
     return "redirect:/profile";
   }
 
