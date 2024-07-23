@@ -40,7 +40,7 @@ public class VideoController {
     public String handleFileUpload(@RequestParam("video") MultipartFile videoFile, @RequestParam("preview") MultipartFile previewFile, @ModelAttribute("videoDtoRequest") VideoDtoRequest videoDtoRequest, Model model) {
         model.addAttribute(videoDtoRequest);
         videoService.createVideo(videoDtoRequest, videoFile, previewFile);
-        videoService.addVideoToLocalStorage(videoFile);
+        //videoService.addVideoToLocalStorage(videoFile);
         return "redirect:/home";
     }
 
