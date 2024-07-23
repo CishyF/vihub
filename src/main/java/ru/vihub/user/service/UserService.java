@@ -2,14 +2,23 @@ package ru.vihub.user.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.vihub.security.dto.RegistrationDtoRequest;
+import ru.vihub.user.dto.UserDto;
 import ru.vihub.user.model.User;
 
-public interface UserService{
+public interface UserService {
+  User findByUsername(String username);
 
+  User findById(long id);
 
-    User findByUsername(String username);
+  User createUser(RegistrationDtoRequest dto);
 
-    User createUser(RegistrationDtoRequest dto);
+  User findCurrentUser();
 
-    UserDetailsService userDetailsService();
+  UserDetailsService userDetailsService();
+
+  void updateUser(UserDto userDto);
+
+  boolean checkPassword(String password);
+
+  void changeUserPassword(String newPassword);
 }

@@ -17,61 +17,79 @@ import java.util.Collection;
 @Table(name = "\"user\"")
 public class User implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    @Column(name = "username", unique = true)
-    private String username;
+  @Column(name = "username", unique = true)
+  private String username;
 
-    @Column(name = "password")
-    private String password;
+  @Column(name = "password")
+  private String password;
 
-    @Column(name = "email", unique = true)
-    private String email;
+  @Column(name = "email", unique = true)
+  private String email;
 
-    @Column(name = "firstname")
-    private String firstname;
+  @Column(name = "firstname")
+  private String firstname;
 
-    @Column(name = "lastname")
-    private String lastname;
+  @Column(name = "lastname")
+  private String lastname;
 
-    @Column(name = "role")
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
+  @Column(name = "phone")
+  private String phone;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getAuthorities();
-    }
+  @Column(name = "address")
+  private String address;
 
-    @Override
-    public String getPassword() {
-        return String.valueOf(password);
-    }
+  @Column(name = "github")
+  private String github;
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
+  @Column(name = "instagram")
+  private String instagram;
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+  @Column(name = "telegram")
+  private String telegram;
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+  @Column(name = "photoUrl")
+  private String photoUrl;
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+  @Column(name = "role")
+  @Enumerated(value = EnumType.STRING)
+  private Role role;
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return role.getAuthorities();
+  }
+
+  @Override
+  public String getPassword() {
+    return String.valueOf(password);
+  }
+
+  @Override
+  public String getUsername() {
+    return username;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
 }

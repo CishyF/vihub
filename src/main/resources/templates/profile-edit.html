@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Редактирование профиля</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <style>
+        @import "/stylesheet/bootstrap.css";
+        body {
+            background-size: 100% 100%;
+            font-family: Arial, sans-serif;
+            background: #f9f9f9 url("/images/profile-edit-background.jpg") no-repeat 50% 20%;
+            margin: 0;
+            padding: 0;
+        }
+        .profile-edit-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgb(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 25px 10px rgba(75, 68, 68, 0.644);
+        }
+    </style>
+</head>
+
+<body>
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="profile-edit-container">
+            <form role="form" method="post" th:action="@{/profile/edit}" th:object="${userForEdit}">
+                <input type="hidden" th:field="*{id}">
+                <div class="row">
+                    <div class="col-md-3 border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                            <div th:switch="${userForDisplay.photoUrl}">
+                                <p th:case="Null"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                       alt="Admin" class="rounded-circle" width="150"></p>
+                                <p th:case="*"><img th:src="${userForDisplay.photoUrl}" alt="Admin" class="rounded-circle"
+                                                    width="150"></p>
+                            </div>
+                            <div class="mt-3">
+                                <h4 th:text="${userForDisplay.username}"></h4>
+                                <h6 th:text="${userForDisplay.email}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 border-right">
+                        <div class="p-3 py-5">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h4 class="text-right">Редактирование профиля</h4>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12"><label class="labels">Имя пользователя</label>
+                                    <input type="text" class="form-control" id="username" name="username"
+                                           th:value="${userForEdit.username}" placeholder="Введите имя пользователя" value="">
+                                    <p th:if="${#fields.hasErrors('username')}" class="text-danger"
+                                       th:errors="*{username}"></p>
+                                    <p th:if="${error}" class="text-danger" role="alert"
+                                        th:text="${error}"></p></div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6"><label class="labels">Имя</label><input type="text"
+                                                                                              class="form-control"
+                                                                                              id="firstname"
+                                                                                              name="firstname"
+                                                                                              placeholder="Введите имя"
+                                                                                              th:value="${userForEdit.firstname}">
+                                    <p th:if="${#fields.hasErrors('firstname')}" class="text-danger"
+                                       th:errors="*{firstname}"></p></div>
+                                <div class="col-md-6"><label class="labels">Фамилия</label><input type="text"
+                                                                                                  class="form-control"
+                                                                                                  id="lastname"
+                                                                                                  name="lastname"
+                                                                                                  th:value="${userForEdit
+                                                                                                  .lastname}"
+                                                                                                  placeholder="Введите фамилию">
+                                    <p th:if="${#fields.hasErrors('lastname')}" class="text-danger"
+                                       th:errors="*{lastname}"></p></div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12"><label class="labels">Почта</label><input type="text"
+                                                                                                 class="form-control"
+                                                                                                 id="email" name="email"
+                                                                                                 placeholder="Введите почту"
+                                                                                                 th:value="${userForEdit.email}">
+                                    <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}">
+                                </div>
+                                <div class="col-md-12"><label class="labels">Номер телефона</label><input type="text"
+                                                                                                          class="form-control"
+                                                                                                          id="phone"
+                                                                                                          name="phone"
+                                                                                                          placeholder="Введите номер телефона"
+                                                                                                          th:value="${userForEdit.phone}">
+                                    <p th:if="${#fields.hasErrors('phone')}" class="text-danger" th:errors="*{phone}">
+                                </div>
+                                <div class="col-md-12"><label class="labels">Адрес</label><input type="text"
+                                                                                                 class="form-control"
+                                                                                                 id="address"
+                                                                                                 name="address"
+                                                                                                 placeholder="Введите адрес"
+                                                                                                 th:value="${userForEdit.address}">
+                                    <p th:if="${#fields.hasErrors('address')}" class="text-danger"
+                                       th:errors="*{address}"></div>
+                                <div class="col-md-12"><label class="labels">GitHub</label><input type="text"
+                                                                                                  class="form-control"
+                                                                                                  id="github"
+                                                                                                  name="github"
+                                                                                                  placeholder="Введите gitHub"
+                                                                                                  th:value="${userForEdit.github}">
+                                    <div class="col-md-12"><label class="labels">Instagram</label><input type="text"
+                                                                                                         class="form-control"
+                                                                                                         id="instagram"
+                                                                                                         name="instagram"
+                                                                                                         placeholder="Введите instagram"
+                                                                                                         th:value="${userForEdit.instagram}">
+                                    </div>
+                                    <div class="col-md-12"><label class="labels">Telegram</label><input type="text"
+                                                                                                        class="form-control"
+                                                                                                        id="telegram"
+                                                                                                        name="telegram"
+                                                                                                        placeholder="Введите telegram"
+                                                                                                        th:value="${userForEdit.telegram}">
+                                    </div>
+                                </div>
+                                <div class="mt-5 text-center">
+                                    <a style="width: 42%" class="btn btn-danger " th:href="@{/profile/password-change}">Изменить
+                                        пароль</a>
+                                </div>
+                                <div class="mt-2 text-center">
+
+                                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                                    <a class="btn btn-primary " th:href="@{/profile}">Назад</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
