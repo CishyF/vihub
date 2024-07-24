@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Профиль</title>
+    <link href="css/bootstrap.css" rel="stylesheet"/>
+    <style>
+        @import "/stylesheet/bootstrap.css";
+        body {
+            background-size: 100% 100%;
+            font-family: Arial, sans-serif;
+            background: #f9f9f9 url("/images/profile-background.jpg") no-repeat 50% 20%;
+            margin: 0;
+            padding: 0;
+        }
+        .profile-container {
+            text-align: center;
+            max-width: 1200px;
+            margin: 50px auto 50px 50px;
+            padding: 20px;
+            background-color: rgb(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 25px 10px rgba(75, 68, 68, 0.5);
+        }
+        .profile-container-main-info {
+            max-width: 1200px;
+            margin: 50px auto 50px 50px;
+            padding: 20px;
+            background-color: rgb(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 25px 10px rgba(75, 68, 68, 0.5);
+        }
+    </style>
+</head>
+<div class="main-body">
+    <section layout:fragment="body" class="py-5">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                    <div class="card-body">
+                        <div class="profile-container">
+                            <div th:switch="${user.photoUrl}">
+                                <p th:case="Null"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                                       alt="Admin" class="rounded-circle" width="150"></p>
+                                <p th:case="*"><img th:src="${user.photoUrl}" alt="Admin" class="rounded-circle"
+                                                    width="150" height="150"></p>
+                            </div>
+                                <h4 th:text="${user.username}"></h4>
+                                <p class="text-secondary mb-1">Пользователь ViHub</p>
+                                <button class="btn btn-primary">Подписаться</button>
+                                <button class="btn btn-outline-primary">Сообщение</button>
+                        </div>
+                    </div>
+                <div class="profile-container">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round" class="feather feather-github mr-2 icon-inline">
+                                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                    </path>
+                                </svg>
+                                Github
+                            </h6>
+                            <span class="text-secondary" th:text="${user.github}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="feather feather-instagram mr-2 icon-inline text-danger">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                                Instagram
+                            </h6>
+                            <span class="text-secondary" th:text="${user.instagram}"></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="feather feather-telegram mr-2 icon-inline text-primary">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                </svg>
+                                Telegram
+                            </h6>
+                            <span class="text-secondary" th:text="${user.telegram}"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="profile-container-main-info">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Имя</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" th:text="${user.firstname}">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Фамилия</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" th:text="${user.lastname}"></div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Почта</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" th:text="${user.email}"></div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Номер телефона</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" th:text="${user.phone}"></div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Адрес</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" th:text="${user.address}"></div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-primary " th:href="@{/profile/edit}">Редактировать</a>
+                                <a class="btn btn-danger" th:href="@{/auth/logout}">Выйти</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+</html>

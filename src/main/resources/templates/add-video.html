@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление видео</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: url("/images/add-video-background.webp");
+            background-repeat: no-repeat;
+            background-size: 100% 120%;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .video-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 25px 10px rgba(75, 68, 68, 0.644);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .picked-file{
+            text-align: center;
+            margin: 10px auto;
+        }
+
+
+        .select-button {
+            font-size: medium;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        input, textarea {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .upload {
+            text-align: center;
+            margin: 10px auto;
+        }
+        #title, #description {
+            width: 80%;
+            margin-bottom: 1rem;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button[type="submit"] {
+            display: block;
+            font-size: medium;
+            margin: 10px auto;
+            padding: 10px;
+            width: 22%;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="video-container">
+    <h1>Добавить видео</h1>
+    <form th:action="@{/add_video}" method="post" enctype="multipart/form-data">
+        <div class="picked-file">
+            <p>Видео: <span id="videoName"></span></p>
+        </div>
+        <div class="upload">
+            <input type="file" name="video" id="video" accept=".mp4"  style="display: none;" required>
+            <label for="video" class="select-button">Выбрать файл</label>
+        </div>
+        <div class="picked-file">
+            <p>Превью: <span id="previewName"></span></p>
+        </div>
+        <div class="upload">
+            <input type="file" name="preview" id="preview" accept="image/*"  style="display: none;" required>
+            <label for="preview" class="select-button">Выбрать файл</label>
+        </div>
+        <input field="*{title}" name="title" type="text" id="title" placeholder="Заголовок" required>
+        <textarea field="*{description}" name="description" type="text" id="description" rows="15" placeholder="Описание" required></textarea>
+        <div class="video-upload">
+            <button type="submit">Загрузить</button>
+        </div>
+    </form>
+</div>
+<script>
+    const videoInput = document.getElementById('video');
+    const videoName = document.getElementById('videoName');
+    videoInput.addEventListener('change', function() {
+        const file = videoInput.files[0];
+        videoName.textContent = file.name;
+        formData.append('file', file);
+    });
+
+    const previewInput = document.getElementById('preview');
+    const previewName = document.getElementById('previewName');
+    previewInput.addEventListener('change', function() {
+        const file = previewInput.files[0];
+        previewName.textContent = file.name;
+        formData.append('file', file);
+    });
+
+</script>
+</body>
+</html>
+

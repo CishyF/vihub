@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Home Page</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+    <style>
+        @import "/stylesheet/bootstrap.css";
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <section class="py-5">
+            <div class="container px-5">
+                <div class="text-center mb-5 mt-0">
+                    <h1 class="fw-bolder">Welcome to ViHub</h1>
+                </div>
+                <div id="" class="row text-size-24 gx-5">
+                    <p>Your go-to streaming service for uploading and watching videos!</p>
+
+                    <h2>Key Features:</h2>
+                    <ul>
+                        <li>Easy registration and authentication process</li>
+                        <li>Seamless video uploading to our secure server</li>
+                        <li>Smooth video playback for your viewing pleasure</li>
+                        <li>Convenient video search based on different criteria</li>
+                        <li>User-friendly profile management for personalized experience</li>
+                        <li>Ability to rate and comment on videos, sharing your thoughts with the community</li>
+                    </ul>
+
+                    <p>Experience the best in video streaming with ViHub. Sign up now and start exploring our vast
+                        library of videos!</p>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
+</body>
+</html>

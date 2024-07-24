@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}"/>
+    <style>
+        @import "/stylesheet/bootstrap.css";
+
+        /* Фиолетовый фон */
+        body {
+            background-color: #7f7ff3;
+        }
+
+        /* Стиль для центрального контейнера */
+        .center-container {
+            display: flex;
+            justify-content: right;
+            margin-right: 150px;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .img {
+            width: 50%;
+        }
+
+        .welcome-text {
+            flex: none;
+            margin-bottom: 450px;
+            color: white;
+            font-size: 90px; /* Размер шрифта текста */
+            margin-right: 150px; /* Отступ между текстом и формой */
+        }
+
+        /* Стили для блока с формой и картинкой */
+        .login-form-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #F4F4F4; /* Белый фон для контейнера */
+            padding: 20px;
+            border-radius: 10px; /* Скругленные углы */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Тень для контейнера */
+            width: 65%; /* Ширина контейнера */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        img {
+            width: 100%; /* Полная ширина картинки относительно контейнера */
+            object-fit: cover; /* Подгонка картинки по размеру контейнера */
+            margin-bottom: 20px; /* Отступ между картинкой и формой */
+            border-radius: 10px; /* Скругленные углы */
+        }
+    </style>
+</head>
+<body>
+
+<div class="center-container">
+    <div class="welcome-text">Вход</div>
+    <div class="login-form-container">
+        <div class="img">
+            <img id="login-image" th:src="@{/images/login.png}" alt="Login Image">
+        </div>
+        <div>
+            <form role="form" method="POST" th:action="@{/auth/login}" th:object="${loginDtoRequest}">
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltipUsername" style="margin-bottom: 10px;">Имя пользователя или почта</label>
+                        <input field="*{username}" name="username" type="text" class="form-control" id="validationTooltipUsername" placeholder="Имя пользователя" aria-describedby="validationTooltipUsernamePrepend" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip01" style="margin-bottom: 10px;">Пароль</label>
+                        <input field="*{password}" name="password" type="password" class="form-control" id="validationTooltip01" placeholder="Пароль" required>
+                    </div>
+                </div>
+                <button id="login_button" class="btn btn-primary" type="submit" style="margin-bottom: 5px;">Войти</button>
+                <p>Еще не с нами? <a th:href="@{/auth/registration}">Зарегистрироваться</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

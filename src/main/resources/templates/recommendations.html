@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Recommendation Page</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+    <style>
+        .preview-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            overflow: hidden;
+        }
+        .preview-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class=" py-5 container py-4 mt-sm-0 mb-sm-0 px-4 px-lg-5">
+            <div class="text-center text-black">
+                <h1 class="display-4 fw-bolder">Recommendations!</h1>
+                <p class="lead fw-normal text-black-50 mb-0">your recommendations:</p>
+            </div>
+        </div>
+
+        <div class="row gx-5">
+            <div th:href="@{/watch/{id}(id=${video.id})}" th:each="video :${videoRecommendationDtoResponses}" class="col-lg-4 mb-4">
+                    <div id="videoTemplate" class="position-relative mb-5">
+                        <div class="preview-container">
+                            <img class="img-fluid rounded-3 mb-3"
+                                 th:src="@{/video/preview/{id}(id=${video.id})}" alt="..." />
+                        </div>
+                        <a th:text="${video.title}"  class="h3 fw-bolder text-decoration-none link-dark stretched-link caption" th:href="@{/watch/{id}(id=${video.id})}">Project name</a>
+                        <!--                    <a th:text="${video.description}"  class="h3 fw-bolder text-decoration-none link-dark stretched-link caption" href="#!">Project name</a>-->
+                    </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

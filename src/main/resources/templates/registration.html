@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/bootstrap.css}" />
+    <style>
+        @import "/stylesheet/bootstrap.css";
+
+        /* Фиолетовый фон */
+        body {
+            background-color: #7f7ff3;
+        }
+
+        /* Стиль для центрального контейнера */
+        .center-container {
+            display: flex;
+            justify-content: left;
+            margin-left: 150px;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .img {
+            width: 50%;
+        }
+
+        .welcome-text {
+            flex: none;
+            margin-bottom: 450px;
+            color: white;
+            font-size: 70px;
+            margin-left: 50px;/* Отступ между текстом и формой */
+        }
+
+        /* Стили для блока с формой и картинкой */
+        .login-form-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #F4F4F4; /* Белый фон для контейнера */
+            padding: 20px;
+            border-radius: 10px; /* Скругленные углы */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Тень для контейнера */
+            width: 65%; /* Ширина контейнера */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        img {
+            width: 100%; /* Полная ширина картинки относительно контейнера */
+            object-fit: cover; /* Подгонка картинки по размеру контейнера */
+            margin-bottom: 20px; /* Отступ между картинкой и формой */
+            border-radius: 10px; /* Скругленные углы */
+        }
+    </style>
+</head>
+<body>
+<div class="center-container">
+    <div class="login-form-container">
+        <div class="img">
+            <img id="login-image" th:src="@{/images/login.png}" alt="Login Image">
+        </div>
+        <div>
+            <form role="form" method="POST" th:action="@{/auth/registration}" th:object="${registrationDtoRequest}" novalidate>
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltipUsername" style="margin-bottom: 10px">Логин</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                            </div>
+                            <input field="*{username}" name="username" type="text" class="form-control" id="validationTooltipUsername" placeholder="Логин" aria-describedby="validationTooltipUsernamePrepend" required>
+                            <div class="invalid-tooltip">
+                                Пожалуйста, выберите уникальный и действительный логин.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip01" style="margin-bottom: 10px">Пароль</label>
+                        <input field="*{password}" name="password" type="password" class="form-control" id="validationTooltip01" placeholder="Пароль" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip02" style="margin-bottom: 10px">Почта</label>
+                        <input field="*{email}" name="email" type="text" class="form-control" id="validationTooltip02" placeholder="Почта" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip03" style="margin-bottom: 10px">Имя</label>
+                        <input field="*{firstname}" name="firstname" type="text" class="form-control" id="validationTooltip03" placeholder="Имя" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationTooltip04" style="margin-bottom: 10px">Фамилия</label>
+                        <input field="*{lastname}" name="lastname" type="text" class="form-control" id="validationTooltip04" placeholder="Фамилия" required>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+    <div class="welcome-text">Регистрация</div>
+</div>
+
+</body>
+</html>
