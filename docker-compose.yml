@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/vihub
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=vihub
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    command: postgres -p 5432
+    ports:
+      - "5432:5432"
