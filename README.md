@@ -17,6 +17,22 @@
 *ViHub is a streaming service that allows users to upload and watch videos. It is developed using Spring Boot and Java 17 to ensure high performance, reliability, and extensibility.*
 
 ---
+## Documentation
+To run, use the following commands in the project root:
+```
+docker-compose up -d db
+```
+```
+./mvnw package
+```
+```
+docker-compose build
+```
+```
+docker-compose up
+```
+## Usage
+To use the application go to **localhost:8080/home**
 ## Features
 * Registration and authentication
 * Video uploading to the server 
@@ -24,5 +40,6 @@
 * Video search based on various criteria
 * User profile management
 * Rating and commenting on videos
+
 
 
